@@ -11,15 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sjp_app">
+
+        <!-- Admin Screen -->
+        <activity android:name=".AdminDashboard" />
+
+        <!-- User Screen -->
+        <activity android:name=".UserDashboard" />
+
+        <!-- Login Screen (Main) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
+
 
 </manifest>
