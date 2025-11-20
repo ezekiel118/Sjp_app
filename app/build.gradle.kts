@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.android.application) // keeps the plugin from your version catalog
-    id("com.google.gms.google-services")    // for Firebase
+    alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -38,8 +38,17 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
+    // Firebase BoM (controls versions)
+    implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
+
+    // Firebase Authentication
+    implementation("com.google.firebase:firebase-auth")
+
+    // Firebase Firestore  ❗ ADD THIS
+    implementation("com.google.firebase:firebase-firestore")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
 }
