@@ -48,6 +48,8 @@ dependencies {
     // Firebase Firestore  ❗ ADD THIS
     implementation("com.google.firebase:firebase-firestore")
 
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
