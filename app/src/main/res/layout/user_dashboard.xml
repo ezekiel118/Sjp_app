@@ -50,7 +50,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <View
-                android:id="@+id/view3"
+                android:id="@+id/profile_box"
                 android:layout_width="0dp"
                 android:layout_height="152dp"
                 android:layout_margin="8dp"
@@ -65,13 +65,15 @@
                 android:id="@+id/profile_image"
                 android:layout_width="107dp"
                 android:layout_height="105dp"
-                android:layout_marginStart="16dp"
                 android:src="@drawable/img"
                 app:civ_border_color="#000"
                 app:civ_border_width="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/view3"
-                app:layout_constraintStart_toStartOf="@+id/view3"
-                app:layout_constraintTop_toTopOf="@+id/view3" />
+                app:layout_constraintBottom_toBottomOf="@+id/profile_box"
+                app:layout_constraintEnd_toEndOf="@+id/profile_box"
+                app:layout_constraintHorizontal_bias="0.052"
+                app:layout_constraintStart_toStartOf="@+id/profile_box"
+                app:layout_constraintTop_toTopOf="@+id/profile_box"
+                app:layout_constraintVertical_bias="0.468" />
 
             <TextView
                 android:id="@+id/name"
@@ -83,10 +85,10 @@
                 android:text="Juan Dela Cruz"
                 android:textColor="@color/white"
                 android:textSize="30sp"
-                app:layout_constraintBottom_toBottomOf="@+id/view3"
-                app:layout_constraintEnd_toEndOf="@+id/view3"
+                app:layout_constraintBottom_toBottomOf="@+id/profile_box"
+                app:layout_constraintEnd_toEndOf="@+id/profile_box"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
-                app:layout_constraintTop_toTopOf="@+id/view3" />
+                app:layout_constraintTop_toTopOf="@+id/profile_box" />
 
             <View
                 android:id="@+id/sched_box"
@@ -97,7 +99,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view3"
+                app:layout_constraintTop_toBottomOf="@id/profile_box"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView

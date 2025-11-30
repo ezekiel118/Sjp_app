@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <!-- 1. MAIN SCREEN CONTENT (First direct child of DrawerLayout) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Toolbar remains at the top -->
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="35dp"
+            android:background="#1E427A"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Main content area below the toolbar -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_content_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:context=".MainActivity">
+
+            <!-- Background rectangle -->
+            <View
+                android:id="@+id/background_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_rec"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Info box -->
+            <View
+                android:id="@+id/info_box"
+                android:layout_width="381dp"
+                android:layout_height="305dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/box_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.149" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="176dp"
+                android:layout_height="176dp"
+                android:src="@drawable/img"
+                app:civ_border_color="#000"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/info_box"
+                app:layout_constraintEnd_toEndOf="@+id/info_box"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="@+id/info_box"
+                app:layout_constraintTop_toTopOf="@+id/info_box"
+                app:layout_constraintVertical_bias="0.147" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Juan Dela Cruz"
+                android:textColor="@color/white"
+                android:textSize="40dp"
+                app:layout_constraintBottom_toBottomOf="@+id/info_box"
+                app:layout_constraintEnd_toEndOf="@+id/info_box"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="@+id/info_box"
+                app:layout_constraintTop_toTopOf="@+id/info_box"
+                app:layout_constraintVertical_bias="0.773" />
+
+            <TextView
+                android:id="@+id/course_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BSIT 1111-1111"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/info_box"
+                app:layout_constraintEnd_toEndOf="@+id/info_box"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="@+id/info_box"
+                app:layout_constraintTop_toTopOf="@+id/info_box"
+                app:layout_constraintVertical_bias="0.935" />
+
+            <View
+                android:id="@+id/academicS_box"
+                android:layout_width="382dp"
+                android:layout_height="190dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/box_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.488"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.608" />
+
+            <TextView
+                android:id="@+id/academicS_item"
+                android:layout_width="369dp"
+                android:layout_height="45dp"
+                android:background="@drawable/item"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="@+id/academicS_box"
+                app:layout_constraintEnd_toEndOf="@+id/academicS_box"
+                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintStart_toStartOf="@+id/academicS_box"
+                app:layout_constraintTop_toTopOf="@+id/academicS_box"
+                app:layout_constraintVertical_bias="0.4" />
+
+            <TextView
+                android:id="@+id/academic_standing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Academic Standing"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/academicS_box"
+                app:layout_constraintEnd_toEndOf="@+id/academicS_box"
+                app:layout_constraintHorizontal_bias="0.051"
+                app:layout_constraintStart_toStartOf="@+id/academicS_box"
+                app:layout_constraintTop_toTopOf="@+id/academicS_box"
+                app:layout_constraintVertical_bias="0.056" />
+
+            <View
+                android:id="@+id/contact_info"
+                android:layout_width="382dp"
+                android:layout_height="190dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/box_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.511"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.916" />
+
+            <TextView
+                android:id="@+id/contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Contact Information"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="@+id/contact_info"
+                app:layout_constraintEnd_toEndOf="@+id/contact_info"
+                app:layout_constraintHorizontal_bias="0.064"
+                app:layout_constraintStart_toStartOf="@+id/contact_info"
+                app:layout_constraintTop_toTopOf="@+id/contact_info"
+                app:layout_constraintVertical_bias="0.093" />
+
+            <TextView
+                android:id="@+id/contact_item"
+                android:layout_width="369dp"
+                android:layout_height="45dp"
+                android:background="@drawable/item"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="@+id/contact_info"
+                app:layout_constraintEnd_toEndOf="@+id/contact_info"
+                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintStart_toStartOf="@+id/contact_info"
+                app:layout_constraintTop_toTopOf="@+id/contact_info"
+                app:layout_constraintVertical_bias="0.468" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <!-- === END OF INTEGRATED CODE === -->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 2. LEFT DRAWER (Second direct child of DrawerLayout) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/drawer_header"
+        app:menu="@menu/drawer_menu" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
