@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    id("com.google.gms.google-services")
+    id("com.google.gms.google-services") // Google Services plugin
 }
 
 android {
@@ -39,15 +39,19 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
 
-    // Firebase BoM (controls versions)
+    // Firebase BoM (manages versions)
     implementation(platform("com.google.firebase:firebase-bom:34.6.0"))
 
     // Firebase Authentication
     implementation("com.google.firebase:firebase-auth")
 
-    // Firebase Firestore  ❗ ADD THIS
+    // Firebase Realtime Database
+    implementation("com.google.firebase:firebase-database")
+
+    // Optional: Firestore if needed
     implementation("com.google.firebase:firebase-firestore")
 
+    // CircleImageView
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
     testImplementation(libs.junit)

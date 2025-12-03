@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AppInsightsSettings">
+    <option name="selectedTabId" value="Firebase Crashlytics" />
+    <option name="tabSettings">
+      <map>
+        <entry key="Firebase Crashlytics">
+          <value>
+            <InsightsFilterSettings>
+              <option name="connection">
+                <ConnectionSetting>
+                  <option name="appId" value="com.example.sjp_app" />
+                  <option name="mobileSdkAppId" value="1:1074943060882:android:e46fc8b6d1458fd8f5ef4b" />
+                  <option name="projectId" value="sjp-app-e38db" />
+                  <option name="projectNumber" value="1074943060882" />
+                </ConnectionSetting>
+              </option>
+              <option name="failureTypes">
+                <list />
+              </option>
+              <option name="signal" value="SIGNAL_UNSPECIFIED" />
+              <option name="timeIntervalDays" value="THIRTY_DAYS" />
+              <option name="visibilityType" value="ALL" />
+            </InsightsFilterSettings>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

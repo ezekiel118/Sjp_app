@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Sjp_app"
 include(":app")
- 

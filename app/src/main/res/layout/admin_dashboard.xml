@@ -201,6 +201,84 @@
                 app:layout_constraintStart_toStartOf="@+id/billing_box"
                 app:layout_constraintTop_toBottomOf="@id/billing_balance" />
 
+            <Button
+                android:id="@+id/add_S"
+                android:layout_width="56dp"
+                android:layout_height="45dp"
+                android:text="+"
+                android:backgroundTint="#359535"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.77"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view"
+                app:layout_constraintVertical_bias="0.449" />
+
+            <Button
+                android:id="@+id/del_S"
+                android:layout_width="56dp"
+                android:layout_height="45dp"
+                android:text="-"
+                android:backgroundTint="#B42828"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.924"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view"
+                app:layout_constraintVertical_bias="0.449" />
+
+            <Button
+                android:id="@+id/del_B"
+                android:layout_width="56dp"
+                android:layout_height="45dp"
+                android:text="-"
+                android:backgroundTint="#B42828"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.935"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view"
+                app:layout_constraintVertical_bias="0.98" />
+
+            <Button
+                android:id="@+id/add_B"
+                android:layout_width="56dp"
+                android:layout_height="45dp"
+                android:text="+"
+                android:backgroundTint="#359535"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.784"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view"
+                app:layout_constraintVertical_bias="0.98" />
+
+            <Button
+                android:id="@+id/del_A"
+                android:layout_width="56dp"
+                android:layout_height="45dp"
+                android:text="-"
+                android:backgroundTint="#B42828"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.935"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view"
+                app:layout_constraintVertical_bias="0.735" />
+
+            <Button
+                android:id="@+id/add_A"
+                android:layout_width="56dp"
+                android:layout_height="45dp"
+                android:text="+"
+                android:backgroundTint="#359535"
+                app:layout_constraintBottom_toBottomOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.784"
+                app:layout_constraintStart_toStartOf="@+id/view"
+                app:layout_constraintTop_toTopOf="@+id/view"
+                app:layout_constraintVertical_bias="0.735" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- === END OF INTEGRATED CODE === -->
 
