@@ -14,13 +14,15 @@
 
         <!-- Admin Screen -->
         <activity android:name=".AdminDashboard" />
-        <activity android:name="admin.AdminProfileActivity"/>
-        <activity android:name=".UserListAdminActivity"/>
-        <activity android:name=".UserProfileActivity"/>
+        <activity android:name=".AdminProfile" />
+        <activity android:name="admin.AdminProfileActivity" />
+        <activity android:name="admin.EditUserActivity" />
 
 
         <!-- User Screen -->
         <activity android:name=".UserDashboard" />
+        <activity android:name=".UserProfile" />
+        <activity android:name=".UserProfileActivity" />
 
         <!-- Login Screen (Main) -->
         <activity

@@ -85,10 +85,26 @@
                 android:text="Juan Dela Cruz"
                 android:textColor="@color/white"
                 android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/course_id"
+                app:layout_constraintEnd_toEndOf="@+id/profile_box"
+                app:layout_constraintStart_toEndOf="@+id/profile_image"
+                app:layout_constraintTop_toTopOf="@+id/profile_box"
+                app:layout_constraintVertical_bias="0.3"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/course_id"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="Course and ID"
+                android:textColor="@color/white"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="@+id/profile_box"
                 app:layout_constraintEnd_toEndOf="@+id/profile_box"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
-                app:layout_constraintTop_toTopOf="@+id/profile_box" />
+                app:layout_constraintTop_toBottomOf="@+id/name" />
 
             <View
                 android:id="@+id/sched_box"
@@ -117,15 +133,14 @@
 
             <TextView
                 android:id="@+id/schedule_item"
-                android:layout_width="372dp"
-                android:layout_height="158dp"
-                android:layout_marginHorizontal="8dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
                 android:background="@drawable/item"
                 app:layout_constraintBottom_toBottomOf="@+id/sched_box"
                 app:layout_constraintEnd_toEndOf="@+id/sched_box"
                 app:layout_constraintStart_toStartOf="@+id/sched_box"
-                app:layout_constraintTop_toBottomOf="@id/today_schedule"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@id/today_schedule" />
 
             <View
                 android:id="@+id/annoucement_box"
@@ -155,15 +170,14 @@
 
             <TextView
                 android:id="@+id/announcments_item"
-                android:layout_width="377dp"
-                android:layout_height="159dp"
-                android:layout_marginHorizontal="8dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="8dp"
                 android:background="@drawable/item"
                 app:layout_constraintBottom_toBottomOf="@+id/annoucement_box"
                 app:layout_constraintEnd_toEndOf="@+id/annoucement_box"
                 app:layout_constraintStart_toStartOf="@+id/annoucement_box"
-                app:layout_constraintTop_toBottomOf="@id/school_announcements"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@id/school_announcements" />
 
             <View
                 android:id="@+id/billing_box"
@@ -216,4 +230,3 @@
         app:menu="@menu/drawer_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
-

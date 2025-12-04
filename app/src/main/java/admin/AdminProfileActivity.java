@@ -1,5 +1,6 @@
 package admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -45,8 +46,11 @@ public class AdminProfileActivity extends AppCompatActivity {
         studentList.setOnItemClickListener((parent, view, position, id) -> {
             String clickedName = (String) parent.getItemAtPosition(position);
             User clickedUser = findUserByName(clickedName);
+
             if (clickedUser != null) {
-                Toast.makeText(this, "Clicked on: " + clickedUser.fullName, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminProfileActivity.this, EditUserActivity.class);
+                intent.putExtra("USER_UID", clickedUser.uid);
+                startActivity(intent);
             }
         });
 
@@ -70,10 +74,6 @@ public class AdminProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Not logged in. Cannot load data.", Toast.LENGTH_LONG).show();
             return;
         }
-
-        // *** THIS IS THE IMPORTANT CHANGE ***
-        // Show the UID of the currently logged-in user.
-        Toast.makeText(this, "Auth UID: " + currentUser.getUid(), Toast.LENGTH_LONG).show();
 
         DatabaseReference userRoleRef = FirebaseDatabase.getInstance("https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("users").child(currentUser.getUid()).child("role");
@@ -114,9 +114,6 @@ public class AdminProfileActivity extends AppCompatActivity {
                     }
                 }
                 adapter.notifyDataSetChanged();
-                if (!userNames.isEmpty()) {
-                    Toast.makeText(AdminProfileActivity.this, "Successfully loaded " + userNames.size() + " users.", Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override
