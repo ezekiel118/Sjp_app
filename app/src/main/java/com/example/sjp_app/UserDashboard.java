@@ -60,16 +60,16 @@ public class UserDashboard extends AppCompatActivity {
         // Handle menu item clicks
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_profile) {
-                Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_appointment) {
-                Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+            if (id == R.id.nav_appointment) {
+                Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_clearance) {
-                Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Clearance clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_grade) {
-                Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Grade clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_home) {
-                Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.nav_profile) {
+                Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_logout) {
                 Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show();
             }

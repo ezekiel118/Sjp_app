@@ -47,6 +47,36 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Info box -->
+
+
+
+
+            <View
+                android:id="@+id/academicS_box"
+                android:layout_width="380dp"
+                android:layout_height="464dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/box_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.51"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.958" />
+
+            <TextView
+                android:id="@+id/academicS_item"
+                android:layout_width="362dp"
+                android:layout_height="416dp"
+                android:background="@drawable/item"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="@+id/academicS_box"
+                app:layout_constraintEnd_toEndOf="@+id/academicS_box"
+                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintStart_toStartOf="@+id/academicS_box"
+                app:layout_constraintTop_toTopOf="@+id/academicS_box"
+                app:layout_constraintVertical_bias="0.812" />
+
             <View
                 android:id="@+id/info_box"
                 android:layout_width="381dp"
@@ -57,7 +87,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.149" />
+                app:layout_constraintVertical_bias="0.065" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
@@ -87,6 +117,30 @@
                 app:layout_constraintStart_toStartOf="@+id/info_box"
                 app:layout_constraintTop_toTopOf="@+id/info_box"
                 app:layout_constraintVertical_bias="0.773" />
+
+            <TextView
+                android:id="@+id/name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Student list"
+                android:textColor="@color/white"
+                android:textSize="35dp"
+                app:layout_constraintBottom_toBottomOf="@+id/academicS_box"
+                app:layout_constraintEnd_toEndOf="@+id/academicS_box"
+                app:layout_constraintHorizontal_bias="0.041"
+                app:layout_constraintStart_toStartOf="@+id/academicS_box"
+                app:layout_constraintTop_toTopOf="@+id/academicS_box"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <SearchView
+                android:layout_width="166dp"
+                android:layout_height="38dp"
+                android:id="@+id/searchlist"
+                android:hint="Search"
+                tools:layout_editor_absoluteX="226dp"
+                tools:layout_editor_absoluteY="366dp"
+                android:background="@drawable/white_search_box_background"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- === END OF INTEGRATED CODE === -->
