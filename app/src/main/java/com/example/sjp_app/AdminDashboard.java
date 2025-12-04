@@ -2,6 +2,7 @@ package com.example.sjp_app;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
@@ -16,6 +17,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+
+import admin.AdminProfileActivity;
 
 public class AdminDashboard extends AppCompatActivity {
 
@@ -53,7 +56,17 @@ public class AdminDashboard extends AppCompatActivity {
         // Navigation menu clicks
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+            if (id == R.id.nav_profile) {
+                Intent intent = new Intent(AdminDashboard.this, AdminProfileActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_logout) {
+                Intent intent = new Intent(AdminDashboard.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+            }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });

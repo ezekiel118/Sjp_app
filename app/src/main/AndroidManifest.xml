@@ -14,6 +14,10 @@
 
         <!-- Admin Screen -->
         <activity android:name=".AdminDashboard" />
+        <activity android:name="admin.AdminProfileActivity"/>
+        <activity android:name=".UserListAdminActivity"/>
+        <activity android:name=".UserProfileActivity"/>
+
 
         <!-- User Screen -->
         <activity android:name=".UserDashboard" />

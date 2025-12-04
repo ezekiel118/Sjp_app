@@ -1,5 +1,6 @@
 package com.example.sjp_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -60,7 +61,15 @@ public class UserDashboard extends AppCompatActivity {
         // Handle menu item clicks
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
-            if (id == R.id.nav_appointment) {
+            if (id == R.id.nav_profile) {
+                Intent intent = new Intent(UserDashboard.this, UserProfileActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_logout) {
+                Intent intent = new Intent(UserDashboard.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else if (id == R.id.nav_appointment) {
                 Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_clearance) {
                 Toast.makeText(this, "Clearance clicked", Toast.LENGTH_SHORT).show();
@@ -68,12 +77,8 @@ public class UserDashboard extends AppCompatActivity {
                 Toast.makeText(this, "Grade clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_home) {
                 Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_profile) {
-                Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_logout) {
-                Toast.makeText(this, "Logout clicked", Toast.LENGTH_SHORT).show();
             }
-            drawerLayout.closeDrawer(GravityCompat.END);
+            drawerLayout.closeDrawer(GravityCompat.START);
             return true;
         });
 
