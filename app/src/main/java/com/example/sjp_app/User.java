@@ -14,15 +14,9 @@ public class User {
     public User() {
     }
 
-    public void setUid(String uid) { this.uid = uid; }
-
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
-
-    public String getContact() { return contact; }
-    public void setContact(String contact) { this.contact = contact; }
-
-    public String getAcademicStanding() { return academicStanding; }
-    public void setAcademicStanding(String academicStanding) { this.academicStanding = academicStanding; }
+    public User(String uid, String fullName, String email) {
+        this.uid = uid;
+        this.fullName = fullName;
+        this.email = email;
     }
-
+}

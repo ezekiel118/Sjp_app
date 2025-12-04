@@ -29,7 +29,6 @@ public class UserListAdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.admin_profile);
 
         listView = findViewById(R.id.student_list);
