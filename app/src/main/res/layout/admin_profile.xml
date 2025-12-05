@@ -49,8 +49,8 @@
             <!-- Info box -->
             <View
                 android:id="@+id/info_box"
-                android:layout_width="381dp"
-                android:layout_height="305dp"
+                android:layout_width="379dp"
+                android:layout_height="248dp"
                 android:layout_margin="8dp"
                 android:background="@drawable/box_item"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -73,6 +73,7 @@
                 app:layout_constraintTop_toTopOf="@+id/info_box"
                 app:layout_constraintVertical_bias="0.147" />
 
+
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
@@ -83,11 +84,9 @@
                 android:textSize="40dp"
                 app:layout_constraintBottom_toBottomOf="@+id/info_box"
                 app:layout_constraintEnd_toEndOf="@+id/info_box"
-                app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="@+id/info_box"
                 app:layout_constraintTop_toTopOf="@+id/info_box"
-                app:layout_constraintVertical_bias="0.773" />
-
+                app:layout_constraintVertical_bias="0.902" />
 
             <View
                 android:id="@+id/academicS_box"
@@ -109,7 +108,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="Student list"
                 android:textColor="@color/white"
-                android:textSize="35dp"
+                android:textSize="25dp"
                 app:layout_constraintBottom_toBottomOf="@+id/academicS_box"
                 app:layout_constraintEnd_toEndOf="@+id/academicS_box"
                 app:layout_constraintHorizontal_bias="0.041"
@@ -131,16 +130,16 @@
 
             <SearchView
                 android:id="@+id/searchlist"
-                android:layout_width="166dp"
-                android:layout_height="38dp"
-                android:hint="Search"
+                android:layout_width="152dp"
+                android:layout_height="26dp"
                 android:background="@drawable/white_search_box_background"
+                android:hint="Search"
                 app:layout_constraintBottom_toBottomOf="@+id/background_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.873"
+                app:layout_constraintHorizontal_bias="0.792"
                 app:layout_constraintStart_toStartOf="@+id/background_view"
                 app:layout_constraintTop_toTopOf="@+id/background_view"
-                app:layout_constraintVertical_bias="0.449" />
+                app:layout_constraintVertical_bias="0.401" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- === END OF INTEGRATED CODE === -->

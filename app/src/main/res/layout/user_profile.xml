@@ -47,6 +47,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!-- Info box -->
+
             <View
                 android:id="@+id/info_box"
                 android:layout_width="381dp"
@@ -57,7 +58,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.149" />
+                app:layout_constraintVertical_bias="0.029" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
@@ -113,20 +114,20 @@
                 app:layout_constraintHorizontal_bias="0.488"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.608" />
+                app:layout_constraintVertical_bias="0.585" />
 
             <TextView
                 android:id="@+id/academicS_item"
-                android:layout_width="369dp"
-                android:layout_height="45dp"
+                android:layout_width="356dp"
+                android:layout_height="90dp"
                 android:background="@drawable/item"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/academicS_box"
                 app:layout_constraintEnd_toEndOf="@+id/academicS_box"
-                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintHorizontal_bias="0.461"
                 app:layout_constraintStart_toStartOf="@+id/academicS_box"
                 app:layout_constraintTop_toTopOf="@+id/academicS_box"
-                app:layout_constraintVertical_bias="0.4" />
+                app:layout_constraintVertical_bias="0.67" />
 
             <TextView
                 android:id="@+id/academic_standing"
@@ -151,10 +152,10 @@
                 android:background="@drawable/box_item"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.511"
+                app:layout_constraintHorizontal_bias="0.533"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.916" />
+                app:layout_constraintVertical_bias="0.951" />
 
             <TextView
                 android:id="@+id/contact"
@@ -173,16 +174,16 @@
 
             <TextView
                 android:id="@+id/contact_item"
-                android:layout_width="369dp"
-                android:layout_height="45dp"
+                android:layout_width="356dp"
+                android:layout_height="76dp"
                 android:background="@drawable/item"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/contact_info"
                 app:layout_constraintEnd_toEndOf="@+id/contact_info"
-                app:layout_constraintHorizontal_bias="0.538"
+                app:layout_constraintHorizontal_bias="0.461"
                 app:layout_constraintStart_toStartOf="@+id/contact_info"
                 app:layout_constraintTop_toTopOf="@+id/contact_info"
-                app:layout_constraintVertical_bias="0.468" />
+                app:layout_constraintVertical_bias="0.64" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- === END OF INTEGRATED CODE === -->

@@ -72,7 +72,8 @@ public class UserDashboard extends AppCompatActivity {
             } else if (id == R.id.nav_appointment) {
                 Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_clearance) {
-                Toast.makeText(this, "Clearance clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserDashboard.this, UserClearanceActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_grade) {
                 Toast.makeText(this, "Grade clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_home) {

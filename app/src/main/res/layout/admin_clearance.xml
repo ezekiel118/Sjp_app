@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Background -->
+
+    <!-- Header Box -->
+
+    <!-- Profile Image -->
+    <View
+        android:id="@+id/view"
+        android:layout_width="433dp"
+        android:layout_height="912dp"
+        android:background="@drawable/bg_rec"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <View
+        android:id="@+id/profile_box"
+        android:layout_width="0dp"
+        android:layout_height="152dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="107dp"
+        android:layout_height="105dp"
+        android:src="@drawable/jp"
+        app:civ_border_color="#000"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_box"
+        app:layout_constraintEnd_toEndOf="@+id/profile_box"
+        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintStart_toStartOf="@+id/profile_box"
+        app:layout_constraintTop_toTopOf="@+id/profile_box"
+        app:layout_constraintVertical_bias="0.468"/>
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="sans-serif-black"
+        android:text="ADMIN"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@+id/profile_box"
+        app:layout_constraintEnd_toEndOf="@+id/profile_box"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="@+id/profile_box" />
+
+    <!-- Course and ID -->
+    <!-- Clearance Box -->
+    <View
+        android:id="@+id/clearance_box"
+        android:layout_width="354dp"
+        android:layout_height="667dp"
+        android:background="@drawable/box_item"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.916" />
+
+    <!-- Clearance Title -->
+    <TextView
+        android:id="@+id/clearnce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Clearance"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toTopOf="@+id/clearance_box"
+        app:layout_constraintStart_toStartOf="@+id/clearance_box"
+        app:layout_constraintEnd_toEndOf="@+id/clearance_box" />
+
+    <!-- Scrollable List -->
+    <ScrollView
+        android:id="@+id/clearance_list"
+        android:layout_width="350dp"
+        android:layout_height="599dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/item"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/clearance_box"
+        app:layout_constraintEnd_toEndOf="@id/clearance_box"
+        app:layout_constraintStart_toStartOf="@id/clearance_box"
+        app:layout_constraintTop_toBottomOf="@id/clearnce">
+
+        <LinearLayout
+            android:id="@+id/ll_admin_clearance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Header -->
+            <TextView
+                android:id="@+id/tv_clearance_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="Clearance Checklist (Admin)"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Row template: TextView | CheckBox | EditText -->
+            <!-- 1. Accounting Office -->
+            <LinearLayout
+                android:id="@+id/row_accounting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Accounting Office"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_accounting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_accounting"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 2. Admission Office -->
+            <LinearLayout
+                android:id="@+id/row_admission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Admission Office"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_admission"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_admission"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 3. AVP-ACAD -->
+            <LinearLayout
+                android:id="@+id/row_avp_acad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="AVP-ACAD"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_avp_acad"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_avp_acad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 4. Campus Ministry -->
+            <LinearLayout
+                android:id="@+id/row_campus_ministry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Campus Ministry"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_campus_ministry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_campus_ministry"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 5. Computer Laboratory -->
+            <LinearLayout
+                android:id="@+id/row_computer_lab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Computer Laboratory"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_computer_lab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_computer_lab"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 6. Digital Laboratory -->
+            <LinearLayout
+                android:id="@+id/row_digital_lab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Digital Laboratory"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_digital_lab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_digital_lab"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 7. Guidance Office -->
+            <LinearLayout
+                android:id="@+id/row_guidance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Guidance Office"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_guidance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_guidance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 8. Library -->
+            <LinearLayout
+                android:id="@+id/row_library"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Library"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_library"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_library"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 9. Office of Student Affairs -->
+            <LinearLayout
+                android:id="@+id/row_osa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Office of Student Affairs"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_osa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_osa"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 10. Program Heads -->
+            <LinearLayout
+                android:id="@+id/row_program_heads"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Program Heads"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_program_heads"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_program_heads"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 11. Property Custodian -->
+            <LinearLayout
+                android:id="@+id/row_property_custodian"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Property Custodian"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_property_custodian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_property_custodian"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 12. Quality Management Office -->
+            <LinearLayout
+                android:id="@+id/row_qmo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Quality Management Office"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_qmo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_qmo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 13. Scholarship and Grants Office -->
+            <LinearLayout
+                android:id="@+id/row_scholarship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Scholarship and Grants Office"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_sgo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_sgo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 14. Science Laboratory -->
+            <LinearLayout
+                android:id="@+id/row_science_lab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Science Laboratory"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_science_lab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_science_lab"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- 15. Supreme Student Council -->
+            <LinearLayout
+                android:id="@+id/row_ssc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Supreme Student Council"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_ssc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/et_ssc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="Remarks"
+                    android:textColorHint="#666"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <!-- Save button -->
+            <Button
+                android:id="@+id/btn_save_clearance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Clearance"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -64,6 +64,9 @@ public class AdminDashboard extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
+            } else if (id == R.id.nav_clearance) {
+                Intent intent = new Intent(AdminDashboard.this, AdminClearanceActivity.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
             }

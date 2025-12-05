@@ -17,6 +17,8 @@
         <activity android:name="admin.AdminProfileActivity"/>
         <activity android:name=".UserListAdminActivity"/>
         <activity android:name=".UserProfileActivity"/>
+        <activity android:name=".AdminClearanceActivity"/>
+        <activity android:name=".UserClearanceActivity"/>
 
 
         <!-- User Screen -->
