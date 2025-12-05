@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +14,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserDashboard extends AppCompatActivity {
 
@@ -27,6 +35,8 @@ public class UserDashboard extends AppCompatActivity {
     private TextView scheduleTextView;
     private TextView announcementTextView;
     private TextView billingTextView;
+    private TextView nameTextView;
+    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,7 @@ public class UserDashboard extends AppCompatActivity {
         scheduleTextView = findViewById(R.id.schedule_item);
         announcementTextView = findViewById(R.id.announcments_item);
         billingTextView = findViewById(R.id.billing_item);
+        nameTextView = findViewById(R.id.name);
 
         // Set toolbar as action bar
         setSupportActionBar(toolbar);
@@ -103,5 +114,29 @@ public class UserDashboard extends AppCompatActivity {
         firebaseManager.loadSchedules(scheduleTextView);
         firebaseManager.loadAnnouncements(announcementTextView);
         firebaseManager.loadBilling(billingTextView);
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            String uid = currentUser.getUid();
+            usersRef = FirebaseDatabase.getInstance("https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users");
+            loadUserName(uid);
+        }
+    }
+
+    private void loadUserName(String userId) {
+        usersRef.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.hasChild("fullName")) {
+                    String fullName = snapshot.child("fullName").getValue(String.class);
+                    nameTextView.setText(fullName);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UserDashboard.this, "Failed to load user name.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

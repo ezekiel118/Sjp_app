@@ -36,7 +36,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.08" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
@@ -53,16 +53,17 @@
         app:layout_constraintVertical_bias="0.468"/>
 
     <!-- Name -->
+
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/user_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:fontFamily="sans-serif-black"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="sans-serif"
         android:text="Juan Dela Cruz"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/profile_box"
         app:layout_constraintEnd_toEndOf="@+id/profile_box"
         app:layout_constraintStart_toEndOf="@+id/profile_image"
@@ -103,8 +104,8 @@
         android:layout_marginTop="10dp"
         android:padding="12dp"
         app:layout_constraintTop_toBottomOf="@id/clearnce"
-        app:layout_constraintStart_toStartOf="@id/clearance_box"
-        app:layout_constraintEnd_toEndOf="@id/clearance_box"
+        app:layout_constraintStart_toStartOf="@+id/clearance_box"
+        app:layout_constraintEnd_toEndOf="@+id/clearance_box"
         app:layout_constraintBottom_toBottomOf="@id/clearance_box">
 
         <LinearLayout

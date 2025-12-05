@@ -23,8 +23,11 @@ import java.util.Map;
 public class UserClearanceActivity extends AppCompatActivity {
 
     private DatabaseReference database;
+    private DatabaseReference usersDatabase;
     private String currentUserId;
     private final Map<String, OfficeUserViews> officeViewsMap = new HashMap<>();
+
+    private TextView userNameTextView;
 
     private static class OfficeUserViews {
         CheckBox checkBox;
@@ -41,17 +44,48 @@ public class UserClearanceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_clearance);
 
+        userNameTextView = findViewById(R.id.user_name);
         database = FirebaseDatabase.getInstance("https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("clearance");
+        usersDatabase = FirebaseDatabase.getInstance("https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("users");
         initializeOfficeViews();
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if (currentUser != null) {
             currentUserId = currentUser.getUid();
+            loadUserName(currentUserId);
             loadClearanceForUser(currentUserId);
         } else {
             Toast.makeText(this, "No user logged in.", Toast.LENGTH_LONG).show();
             finish(); // Close activity if no user is found
         }
+    }
+
+    private void loadUserName(String userId) {
+        usersDatabase.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists() && snapshot.hasChild("fullName")) {
+                    String fullName = snapshot.child("fullName").getValue(String.class);
+                    userNameTextView.setText(fullName);
+                } else {
+                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                    if (currentUser != null) {
+                        // Fallback to email if name not found
+                        userNameTextView.setText(currentUser.getEmail());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(UserClearanceActivity.this, "Failed to load user name.", Toast.LENGTH_SHORT).show();
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                if (currentUser != null) {
+                    // Fallback to email on error
+                    userNameTextView.setText(currentUser.getEmail());
+                }
+            }
+        });
     }
 
     private void initializeOfficeViews() {

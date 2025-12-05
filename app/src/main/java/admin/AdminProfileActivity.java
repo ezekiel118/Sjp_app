@@ -1,5 +1,6 @@
 package admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -7,11 +8,21 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.sjp_app.MainActivity;
 import com.example.sjp_app.R;
 import com.example.sjp_app.User;
+import com.example.sjp_app.UserClearanceActivity;
+import com.example.sjp_app.UserDashboard;
+import com.example.sjp_app.UserProfileActivity;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +42,10 @@ public class AdminProfileActivity extends AppCompatActivity {
     private List<User> usersList = new ArrayList<>();
     private List<String> userNames = new ArrayList<>();
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +53,56 @@ public class AdminProfileActivity extends AppCompatActivity {
 
         studentList = findViewById(R.id.student_list);
         searchView = findViewById(R.id.searchlist);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        );
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_profile) {
+                // Already on profile, do nothing or refresh
+                Toast.makeText(this, "Already on Profile", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.nav_logout) {
+                Intent intent = new Intent(AdminProfileActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else if (id == R.id.nav_home) {
+                Intent intent = new Intent(AdminProfileActivity.this, UserDashboard.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_clearance) {
+                Intent intent = new Intent(AdminProfileActivity.this, UserClearanceActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Item clicked", Toast.LENGTH_SHORT).show();
+            }
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                }
+            }
+        });
 
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userNames);
         studentList.setAdapter(adapter);
@@ -70,10 +135,6 @@ public class AdminProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Not logged in. Cannot load data.", Toast.LENGTH_LONG).show();
             return;
         }
-
-        // *** THIS IS THE IMPORTANT CHANGE ***
-        // Show the UID of the currently logged-in user.
-        Toast.makeText(this, "Auth UID: " + currentUser.getUid(), Toast.LENGTH_LONG).show();
 
         DatabaseReference userRoleRef = FirebaseDatabase.getInstance("https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .getReference("users").child(currentUser.getUid()).child("role");
