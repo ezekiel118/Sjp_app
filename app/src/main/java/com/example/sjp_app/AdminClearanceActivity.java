@@ -79,19 +79,21 @@ public class AdminClearanceActivity extends AppCompatActivity {
                 startActivity(intent);
             } else if (id == R.id.nav_logout) {
                 Intent intent = new Intent(AdminClearanceActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
             } else if (id == R.id.nav_clearance) {
-                // Already on this screen
+                Intent intent = new Intent(AdminClearanceActivity.this, AdminClearanceActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_grade) {
                 Intent intent = new Intent(AdminClearanceActivity.this, AdminGradesActivity.class);
+                startActivity(intent);
+            }else if (id == R.id.nav_home) {
+                Intent intent = new Intent(AdminClearanceActivity.this, AdminDashboard.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
+
         });
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {

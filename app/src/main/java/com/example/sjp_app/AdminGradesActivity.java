@@ -23,6 +23,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import admin.AdminProfileActivity;
 import models.User;
 
 import java.util.ArrayList;
@@ -46,6 +48,9 @@ public class AdminGradesActivity extends AppCompatActivity implements Navigation
     private final DatabaseReference usersDatabase = FirebaseDatabase.getInstance(
             "https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app"
     ).getReference("users");
+    private final DatabaseReference roleDatabase = FirebaseDatabase.getInstance(
+            "https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app"
+    ).getReference("role");
 
     private TextView tvStudentName;
 
@@ -204,19 +209,27 @@ public class AdminGradesActivity extends AppCompatActivity implements Navigation
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.nav_grade) {
-            // Already in this activity
-        } else if (itemId == R.id.nav_clearance) {
-            startActivity(new Intent(this, AdminClearanceActivity.class));
-        } else if (itemId == R.id.nav_profile) {
-            startActivity(new Intent(this, UserListAdminActivity.class));
-        } else if (itemId == R.id.nav_logout) {
-            // Handle logout
+        int id = item.getItemId();
+        if (id == R.id.nav_profile) {
+            Intent intent = new Intent(AdminGradesActivity.this, AdminProfileActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_logout) {
+            Intent intent = new Intent(AdminGradesActivity.this, MainActivity.class);
+        } else if (id == R.id.nav_clearance) {
+            Intent intent = new Intent(AdminGradesActivity.this, AdminClearanceActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_grade) {
+            Intent intent = new Intent(AdminGradesActivity.this, AdminGradesActivity.class);
+            startActivity(intent);
+        }else if (id == R.id.nav_home) {
+            Intent intent = new Intent(AdminGradesActivity.this, AdminDashboard.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
         }
-
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+
     }
 
     @Override

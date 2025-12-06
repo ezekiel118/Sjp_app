@@ -77,11 +77,10 @@ public class UserDashboard extends AppCompatActivity {
                 startActivity(intent);
             } else if (id == R.id.nav_logout) {
                 Intent intent = new Intent(UserDashboard.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
             } else if (id == R.id.nav_appointment) {
                 Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
+
             } else if (id == R.id.nav_clearance) {
                 Intent intent = new Intent(UserDashboard.this, UserClearanceActivity.class);
                 startActivity(intent);
@@ -89,7 +88,8 @@ public class UserDashboard extends AppCompatActivity {
                 Intent intent = new Intent(UserDashboard.this, UserGradesActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_home) {
-                Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserDashboard.this, UserDashboard.class);
+                startActivity(intent);
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;

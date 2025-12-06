@@ -49,6 +49,9 @@ public class UserGradesActivity extends AppCompatActivity implements NavigationV
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
@@ -155,15 +158,23 @@ public class UserGradesActivity extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.nav_grade) {
-            // Already in this activity
-        } else if (itemId == R.id.nav_clearance) {
-            startActivity(new Intent(this, UserClearanceActivity.class));
-        } else if (itemId == R.id.nav_profile) {
+        int id = item.getItemId();
+        if (id == R.id.nav_profile) {
             startActivity(new Intent(this, UserProfileActivity.class));
-        } else if (itemId == R.id.nav_logout) {
-            // Handle logout
+        } else if (id == R.id.nav_logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.nav_appointment) {
+            Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_clearance) {
+            startActivity(new Intent(this, UserClearanceActivity.class));
+        } else if (id == R.id.nav_grade) {
+            Toast.makeText(this, "Already on Grades screen", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_home) {
+            startActivity(new Intent(this, UserDashboard.class));
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

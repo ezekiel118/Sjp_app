@@ -19,11 +19,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.sjp_app.AdminClearanceActivity;
+import com.example.sjp_app.AdminGradesActivity;
 import com.example.sjp_app.MainActivity;
 import com.example.sjp_app.R;
 import com.example.sjp_app.User;
+import com.example.sjp_app.AdminDashboard; // Assuming you have an AdminDashboard
 import com.example.sjp_app.UserClearanceActivity;
-import com.example.sjp_app.UserDashboard;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -74,16 +76,21 @@ public class AdminProfileActivity extends AppCompatActivity implements UserListA
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_profile) {
-                Toast.makeText(this, "Already on Profile", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminProfileActivity.this, AdminProfileActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_logout) {
                 Intent intent = new Intent(AdminProfileActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            } else if (id == R.id.nav_home) {
-                startActivity(new Intent(AdminProfileActivity.this, UserDashboard.class));
             } else if (id == R.id.nav_clearance) {
-                startActivity(new Intent(AdminProfileActivity.this, UserClearanceActivity.class));
+                Intent intent = new Intent(AdminProfileActivity.this, AdminClearanceActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_grade) {
+                Intent intent = new Intent(AdminProfileActivity.this, AdminGradesActivity.class);
+                startActivity(intent);
+            }else if (id == R.id.nav_home) {
+                Intent intent = new Intent(AdminProfileActivity.this, AdminDashboard.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
@@ -133,7 +140,6 @@ public class AdminProfileActivity extends AppCompatActivity implements UserListA
         EditText etAcademicStanding = view.findViewById(R.id.et_academic_standing);
         EditText etContact = view.findViewById(R.id.et_contact);
 
-        // Set existing values
         etAcademicStanding.setText(user.getAcademicStanding());
         etContact.setText(user.getContact());
 

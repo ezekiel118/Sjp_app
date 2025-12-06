@@ -52,24 +52,26 @@ public class UserProfileActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Handle menu item clicks
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_profile) {
-                // Already on profile, do nothing or refresh
-                Toast.makeText(this, "Already on Profile", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserProfileActivity.this, UserProfileActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_logout) {
                 Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
-            } else if (id == R.id.nav_home) {
-                Intent intent = new Intent(UserProfileActivity.this, UserDashboard.class);
-                startActivity(intent);
+            } else if (id == R.id.nav_appointment) {
+                Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_clearance) {
                 Intent intent = new Intent(UserProfileActivity.this, UserClearanceActivity.class);
                 startActivity(intent);
-            } else {
-                Toast.makeText(this, "Item clicked", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.nav_grade) {
+                Intent intent = new Intent(UserProfileActivity.this, UserGradesActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_home) {
+                Intent intent = new Intent(UserProfileActivity.this, UserDashboard.class);
+                startActivity(intent);
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;

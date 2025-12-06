@@ -73,6 +73,7 @@ public class UserClearanceActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Handle menu item clicks
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_profile) {
@@ -80,13 +81,12 @@ public class UserClearanceActivity extends AppCompatActivity {
                 startActivity(intent);
             } else if (id == R.id.nav_logout) {
                 Intent intent = new Intent(UserClearanceActivity.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
             } else if (id == R.id.nav_appointment) {
                 Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_clearance) {
-                // Already in Clearance
+                Intent intent = new Intent(UserClearanceActivity.this, UserClearanceActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_grade) {
                 Intent intent = new Intent(UserClearanceActivity.this, UserGradesActivity.class);
                 startActivity(intent);
