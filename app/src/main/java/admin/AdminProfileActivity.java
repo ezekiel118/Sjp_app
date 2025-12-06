@@ -2,8 +2,10 @@ package admin;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ArrayAdapter;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -11,6 +13,7 @@ import android.widget.Toast;
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -21,7 +24,6 @@ import com.example.sjp_app.R;
 import com.example.sjp_app.User;
 import com.example.sjp_app.UserClearanceActivity;
 import com.example.sjp_app.UserDashboard;
-import com.example.sjp_app.UserProfileActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,15 +34,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class AdminProfileActivity extends AppCompatActivity {
+import adapters.UserListAdapter;
+
+public class AdminProfileActivity extends AppCompatActivity implements UserListAdapter.OnUserClickListener {
 
     private ListView studentList;
     private SearchView searchView;
-    private ArrayAdapter<String> adapter;
+    private UserListAdapter adapter;
     private List<User> usersList = new ArrayList<>();
-    private List<String> userNames = new ArrayList<>();
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -60,11 +65,8 @@ public class AdminProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this,
-                drawerLayout,
-                toolbar,
-                R.string.navigation_drawer_open,
-                R.string.navigation_drawer_close
+                this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close
         );
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -72,7 +74,6 @@ public class AdminProfileActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_profile) {
-                // Already on profile, do nothing or refresh
                 Toast.makeText(this, "Already on Profile", Toast.LENGTH_SHORT).show();
             } else if (id == R.id.nav_logout) {
                 Intent intent = new Intent(AdminProfileActivity.this, MainActivity.class);
@@ -80,13 +81,9 @@ public class AdminProfileActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else if (id == R.id.nav_home) {
-                Intent intent = new Intent(AdminProfileActivity.this, UserDashboard.class);
-                startActivity(intent);
+                startActivity(new Intent(AdminProfileActivity.this, UserDashboard.class));
             } else if (id == R.id.nav_clearance) {
-                Intent intent = new Intent(AdminProfileActivity.this, UserClearanceActivity.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Item clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(AdminProfileActivity.this, UserClearanceActivity.class));
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;
@@ -104,16 +101,8 @@ public class AdminProfileActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userNames);
+        adapter = new UserListAdapter(this, usersList, this);
         studentList.setAdapter(adapter);
-
-        studentList.setOnItemClickListener((parent, view, position, id) -> {
-            String clickedName = (String) parent.getItemAtPosition(position);
-            User clickedUser = findUserByName(clickedName);
-            if (clickedUser != null) {
-                Toast.makeText(this, "Clicked on: " + clickedUser.fullName, Toast.LENGTH_SHORT).show();
-            }
-        });
 
         checkUserRoleAndLoadData();
 
@@ -127,6 +116,57 @@ public class AdminProfileActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onUserClick(User user) {
+        showEditUserDialog(user);
+    }
+
+    private void showEditUserDialog(User user) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Edit User");
+
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_edit_user, null);
+        builder.setView(view);
+
+        EditText etAcademicStanding = view.findViewById(R.id.et_academic_standing);
+        EditText etContact = view.findViewById(R.id.et_contact);
+
+        // Set existing values
+        etAcademicStanding.setText(user.getAcademicStanding());
+        etContact.setText(user.getContact());
+
+        builder.setPositiveButton("Save", (dialog, which) -> {
+            String newAcademicStanding = etAcademicStanding.getText().toString().trim();
+            String newContact = etContact.getText().toString().trim();
+
+            if(newAcademicStanding.isEmpty() || newContact.isEmpty()) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            updateUserInFirebase(user.getUid(), newAcademicStanding, newContact);
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+        AlertDialog dialog = builder.create();
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.show();
+    }
+
+    private void updateUserInFirebase(String userId, String academicStanding, String contact) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance("https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                .getReference("users").child(userId);
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("academicStanding", academicStanding);
+        updates.put("contact", contact);
+
+        userRef.updateChildren(updates)
+                .addOnSuccessListener(aVoid -> Toast.makeText(AdminProfileActivity.this, "User updated successfully", Toast.LENGTH_SHORT).show())
+                .addOnFailureListener(e -> Toast.makeText(AdminProfileActivity.this, "Failed to update user", Toast.LENGTH_SHORT).show());
     }
 
     private void checkUserRoleAndLoadData() {
@@ -152,7 +192,6 @@ public class AdminProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Role check was cancelled: " + error.getMessage());
                 Toast.makeText(AdminProfileActivity.this, "Error checking user role.", Toast.LENGTH_LONG).show();
             }
         });
@@ -165,34 +204,18 @@ public class AdminProfileActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 usersList.clear();
-                userNames.clear();
                 for (DataSnapshot ds : snapshot.getChildren()) {
                     User u = ds.getValue(User.class);
                     if (u != null) {
-                        u.uid = ds.getKey();
+                        u.setUid(ds.getKey());
                         usersList.add(u);
-                        userNames.add(u.fullName != null ? u.fullName : "(no name)");
                     }
                 }
                 adapter.notifyDataSetChanged();
-                if (!userNames.isEmpty()) {
-                    Toast.makeText(AdminProfileActivity.this, "Successfully loaded " + userNames.size() + " users.", Toast.LENGTH_SHORT).show();
-                }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Reading user list was cancelled: " + error.getMessage());
-            }
+            public void onCancelled(@NonNull DatabaseError error) { }
         });
-    }
-
-    private User findUserByName(String name) {
-        for (User user : usersList) {
-            if (user.fullName != null && user.fullName.equals(name)) {
-                return user;
-            }
-        }
-        return null;
     }
 }

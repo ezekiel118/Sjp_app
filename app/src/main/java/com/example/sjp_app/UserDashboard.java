@@ -86,7 +86,8 @@ public class UserDashboard extends AppCompatActivity {
                 Intent intent = new Intent(UserDashboard.this, UserClearanceActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_grade) {
-                Toast.makeText(this, "Grade clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserDashboard.this, UserGradesActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_home) {
                 Toast.makeText(this, "Home clicked", Toast.LENGTH_SHORT).show();
             }

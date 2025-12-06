@@ -81,7 +81,7 @@
                 android:fontFamily="sans-serif-black"
                 android:text="Juan Dela Cruz"
                 android:textColor="@color/white"
-                android:textSize="40dp"
+                android:textSize="35dp"
                 app:layout_constraintBottom_toBottomOf="@+id/info_box"
                 app:layout_constraintEnd_toEndOf="@+id/info_box"
                 app:layout_constraintHorizontal_bias="0.495"

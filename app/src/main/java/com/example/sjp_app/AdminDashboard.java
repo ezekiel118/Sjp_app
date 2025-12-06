@@ -57,7 +57,7 @@ public class AdminDashboard extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_profile) {
-                Intent intent = new Intent(AdminDashboard.this, AdminProfileActivity.class);
+                Intent intent = new Intent(AdminDashboard.this, UserListAdminActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_logout) {
                 Intent intent = new Intent(AdminDashboard.this, MainActivity.class);
@@ -66,6 +66,9 @@ public class AdminDashboard extends AppCompatActivity {
                 finish();
             } else if (id == R.id.nav_clearance) {
                 Intent intent = new Intent(AdminDashboard.this, AdminClearanceActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_grade) {
+                Intent intent = new Intent(AdminDashboard.this, AdminGradesActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();

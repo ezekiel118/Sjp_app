@@ -16,13 +16,16 @@
         <activity android:name=".AdminDashboard" />
         <activity android:name="admin.AdminProfileActivity"/>
         <activity android:name=".UserListAdminActivity"/>
-        <activity android:name=".UserProfileActivity"/>
         <activity android:name=".AdminClearanceActivity"/>
-        <activity android:name=".UserClearanceActivity"/>
+        <activity android:name=".AdminGradesActivity"/>
 
 
         <!-- User Screen -->
         <activity android:name=".UserDashboard" />
+        <activity android:name=".UserProfileActivity"/>
+        <activity android:name=".UserClearanceActivity"/>
+        <activity android:name=".UserGradesActivity"/>
+
 
         <!-- Login Screen (Main) -->
         <activity

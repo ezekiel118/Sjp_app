@@ -1,14 +1,21 @@
 package com.example.sjp_app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.sjp_app.data.ClearanceItem;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +29,9 @@ import java.util.Map;
 
 public class UserClearanceActivity extends AppCompatActivity {
 
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
     private DatabaseReference database;
     private DatabaseReference usersDatabase;
     private String currentUserId;
@@ -39,10 +49,66 @@ public class UserClearanceActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_clearance);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
+        toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        );
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_profile) {
+                Intent intent = new Intent(UserClearanceActivity.this, UserProfileActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_logout) {
+                Intent intent = new Intent(UserClearanceActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else if (id == R.id.nav_appointment) {
+                Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.nav_clearance) {
+                // Already in Clearance
+            } else if (id == R.id.nav_grade) {
+                Intent intent = new Intent(UserClearanceActivity.this, UserGradesActivity.class);
+                startActivity(intent);
+            } else if (id == R.id.nav_home) {
+                Intent intent = new Intent(UserClearanceActivity.this, UserDashboard.class);
+                startActivity(intent);
+            }
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                }
+            }
+        });
 
         userNameTextView = findViewById(R.id.user_name);
         database = FirebaseDatabase.getInstance("https://sjp-app-e38db-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("clearance");
@@ -87,6 +153,7 @@ public class UserClearanceActivity extends AppCompatActivity {
             }
         });
     }
+    
 
     private void initializeOfficeViews() {
         // This maps office names from Firebase to the IDs in your user_clearance.xml

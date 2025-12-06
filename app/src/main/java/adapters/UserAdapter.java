@@ -2,36 +2,37 @@
 package adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.firebase.database.FirebaseDatabase;
 import com.example.sjp_app.R;
-
-
+import models.User;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import admin.AdminProfileActivity;
-import models.User;
-
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
+
+    public interface OnUserClickListener {
+        void onUserClick(User user);
+    }
+
     private final Context ctx;
     private final List<User> orig = new ArrayList<>();
     private final List<User> filtered = new ArrayList<>();
+    private final OnUserClickListener listener;
 
-    public UserAdapter(Context ctx, List<User> data) {
+    public UserAdapter(Context ctx, List<User> data, OnUserClickListener listener) {
         this.ctx = ctx;
         if (data != null) {
             orig.addAll(data);
             filtered.addAll(data);
         }
+        this.listener = listener;
     }
 
     @NonNull
@@ -48,9 +49,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
         holder.tvContact.setText(u.getContact() != null ? u.getContact() : "");
         holder.tvRole.setText(u.getRole() != null ? u.getRole() : "user");
         holder.itemView.setOnClickListener(v -> {
-            Intent i = new Intent(ctx, AdminProfileActivity.class);
-            i.putExtra("targetUid", u.getUid());
-            ctx.startActivity(i);
+            if (listener != null) {
+                listener.onUserClick(u);
+            }
         });
     }
 

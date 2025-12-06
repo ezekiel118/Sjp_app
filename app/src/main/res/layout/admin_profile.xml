@@ -136,10 +136,10 @@
                 android:hint="Search"
                 app:layout_constraintBottom_toBottomOf="@+id/background_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.792"
+                app:layout_constraintHorizontal_bias="0.781"
                 app:layout_constraintStart_toStartOf="@+id/background_view"
                 app:layout_constraintTop_toTopOf="@+id/background_view"
-                app:layout_constraintVertical_bias="0.401" />
+                app:layout_constraintVertical_bias="0.451" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
         <!-- === END OF INTEGRATED CODE === -->
