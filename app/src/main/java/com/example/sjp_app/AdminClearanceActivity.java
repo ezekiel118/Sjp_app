@@ -235,7 +235,7 @@ public class AdminClearanceActivity extends AppCompatActivity implements Navigat
         } else if (id == R.id.nav_clearance) {
             Toast.makeText(this, "Already on Clearance screen", Toast.LENGTH_SHORT).show();
         } else if (id == R.id.nav_grade) {
-            startActivity(new Intent(this, AdminSelectUserActivity.class));
+            startActivity(new Intent(this, AdminGradesActivity.class));
         } else if (id == R.id.nav_logout) {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, MainActivity.class);

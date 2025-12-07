@@ -83,7 +83,8 @@ public class UserClearanceActivity extends AppCompatActivity {
                 Intent intent = new Intent(UserClearanceActivity.this, MainActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_appointment) {
-                Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserClearanceActivity.this, UserAppointmentActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_clearance) {
 
             } else if (id == R.id.nav_grade) {
