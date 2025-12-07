@@ -24,7 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class UserGradesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+// The "implements" declaration is no longer needed with the lambda style
+public class UserGradesActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private TextView tvStudentName;
@@ -55,11 +56,34 @@ public class UserGradesActivity extends AppCompatActivity implements NavigationV
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        // --- Corrected Navigation Logic using Lambda Style ---
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_profile) {
+                startActivity(new Intent(UserGradesActivity.this, UserProfileActivity.class));
+            } else if (id == R.id.nav_logout) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(UserGradesActivity.this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            } else if (id == R.id.nav_appointment) {
+                startActivity(new Intent(UserGradesActivity.this, UserAppointmentActivity.class));
+            } else if (id == R.id.nav_clearance) {
+                startActivity(new Intent(UserGradesActivity.this, UserClearanceActivity.class));
+            } else if (id == R.id.nav_grade) {
+                Toast.makeText(this, "Already on Grades screen", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.nav_home) {
+                startActivity(new Intent(UserGradesActivity.this, UserDashboard.class));
+            }
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
 
         tvStudentName = findViewById(R.id.user_name);
         progressBar = findViewById(R.id.progress_bar);
@@ -154,31 +178,6 @@ public class UserGradesActivity extends AppCompatActivity implements NavigationV
         et.setClickable(false);
         et.setLongClickable(false);
         et.setCursorVisible(false);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.nav_profile) {
-            startActivity(new Intent(this, UserProfileActivity.class));
-        } else if (id == R.id.nav_logout) {
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
-        } else if (id == R.id.nav_appointment) {
-            Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_clearance) {
-            startActivity(new Intent(this, UserClearanceActivity.class));
-        } else if (id == R.id.nav_grade) {
-            Toast.makeText(this, "Already on Grades screen", Toast.LENGTH_SHORT).show();
-        } else if (id == R.id.nav_home) {
-            startActivity(new Intent(this, UserDashboard.class));
-        }
-
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     @Override

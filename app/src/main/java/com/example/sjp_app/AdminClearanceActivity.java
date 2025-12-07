@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.sjp_app.data.ClearanceItem;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +32,7 @@ import java.util.Map;
 
 import admin.AdminProfileActivity;
 
-public class AdminClearanceActivity extends AppCompatActivity {
+public class AdminClearanceActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -72,29 +74,7 @@ public class AdminClearanceActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_profile) {
-                Intent intent = new Intent(AdminClearanceActivity.this, AdminProfileActivity.class);
-                startActivity(intent);
-            } else if (id == R.id.nav_logout) {
-                Intent intent = new Intent(AdminClearanceActivity.this, MainActivity.class);
-            } else if (id == R.id.nav_clearance) {
-                Intent intent = new Intent(AdminClearanceActivity.this, AdminClearanceActivity.class);
-                startActivity(intent);
-            } else if (id == R.id.nav_grade) {
-                Intent intent = new Intent(AdminClearanceActivity.this, AdminGradesActivity.class);
-                startActivity(intent);
-            }else if (id == R.id.nav_home) {
-                Intent intent = new Intent(AdminClearanceActivity.this, AdminDashboard.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
-            }
-            drawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-
-        });
+        navigationView.setNavigationItemSelectedListener(this);
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -112,7 +92,7 @@ public class AdminClearanceActivity extends AppCompatActivity {
                 .getReference();
 
         initializeOfficeViews();
-        showUserSelectionDialog(); // Simplified to a single, more robust method
+        showUserSelectionDialog();
     }
 
     private void initializeOfficeViews() {
@@ -143,7 +123,7 @@ public class AdminClearanceActivity extends AppCompatActivity {
         database.child("users").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (isFinishing()) return; // Safety check
+                if (isFinishing()) return; 
                 progressDialog.dismiss();
 
                 final ArrayList<String> userNames = new ArrayList<>();
@@ -177,10 +157,9 @@ public class AdminClearanceActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                if (isFinishing()) return; // Safety check
+                if (isFinishing()) return; 
                 progressDialog.dismiss();
 
-                // Show a more descriptive error dialog
                 new AlertDialog.Builder(AdminClearanceActivity.this)
                         .setTitle("Database Error")
                         .setMessage("Could not read user list. This is likely a Firebase Rules permission error. Ensure your admin account has read access to the '/users' path.\n\nError: " + databaseError.getMessage())
@@ -241,5 +220,31 @@ public class AdminClearanceActivity extends AppCompatActivity {
         if (clearanceRef != null && clearanceListener != null) {
             clearanceRef.removeEventListener(clearanceListener);
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            startActivity(new Intent(this, AdminDashboard.class));
+        } else if (id == R.id.nav_profile) {
+            startActivity(new Intent(this, AdminProfileActivity.class));
+        } else if (id == R.id.nav_appointment) {
+            startActivity(new Intent(this, AdminAppointmentActivity.class));
+        } else if (id == R.id.nav_clearance) {
+            Toast.makeText(this, "Already on Clearance screen", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_grade) {
+            startActivity(new Intent(this, AdminSelectUserActivity.class));
+        } else if (id == R.id.nav_logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

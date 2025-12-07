@@ -56,13 +56,13 @@ public class UserProfileActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_profile) {
-                Intent intent = new Intent(UserProfileActivity.this, UserProfileActivity.class);
-                startActivity(intent);
+
             } else if (id == R.id.nav_logout) {
                 Intent intent = new Intent(UserProfileActivity.this, MainActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_appointment) {
-                Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserProfileActivity.this, UserAppointmentActivity.class);
+                startActivity(intent);
             } else if (id == R.id.nav_clearance) {
                 Intent intent = new Intent(UserProfileActivity.this, UserClearanceActivity.class);
                 startActivity(intent);

@@ -3,6 +3,7 @@ package admin;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -19,13 +20,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.sjp_app.AdminAppointmentActivity;
 import com.example.sjp_app.AdminClearanceActivity;
+import com.example.sjp_app.AdminDashboard;
 import com.example.sjp_app.AdminGradesActivity;
+import com.example.sjp_app.AdminSelectUserActivity;
 import com.example.sjp_app.MainActivity;
 import com.example.sjp_app.R;
 import com.example.sjp_app.User;
-import com.example.sjp_app.AdminDashboard; // Assuming you have an AdminDashboard
-import com.example.sjp_app.UserClearanceActivity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,7 +44,7 @@ import java.util.Map;
 
 import adapters.UserListAdapter;
 
-public class AdminProfileActivity extends AppCompatActivity implements UserListAdapter.OnUserClickListener {
+public class AdminProfileActivity extends AppCompatActivity implements UserListAdapter.OnUserClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private ListView studentList;
     private SearchView searchView;
@@ -73,28 +75,7 @@ public class AdminProfileActivity extends AppCompatActivity implements UserListA
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        navigationView.setNavigationItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if (id == R.id.nav_profile) {
-                Intent intent = new Intent(AdminProfileActivity.this, AdminProfileActivity.class);
-                startActivity(intent);
-            } else if (id == R.id.nav_logout) {
-                Intent intent = new Intent(AdminProfileActivity.this, MainActivity.class);
-            } else if (id == R.id.nav_clearance) {
-                Intent intent = new Intent(AdminProfileActivity.this, AdminClearanceActivity.class);
-                startActivity(intent);
-            } else if (id == R.id.nav_grade) {
-                Intent intent = new Intent(AdminProfileActivity.this, AdminGradesActivity.class);
-                startActivity(intent);
-            }else if (id == R.id.nav_home) {
-                Intent intent = new Intent(AdminProfileActivity.this, AdminDashboard.class);
-                startActivity(intent);
-            } else {
-                Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
-            }
-            drawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-        });
+        navigationView.setNavigationItemSelectedListener(this);
 
         getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
@@ -223,5 +204,32 @@ public class AdminProfileActivity extends AppCompatActivity implements UserListA
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.nav_home) {
+            startActivity(new Intent(this, AdminDashboard.class));
+        } else if (id == R.id.nav_profile) {
+            Toast.makeText(this, "Already on Profile screen", Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.nav_appointment) {
+            startActivity(new Intent(this, AdminAppointmentActivity.class));
+        } else if (id == R.id.nav_clearance) {
+            startActivity(new Intent(this, AdminClearanceActivity.class));
+        } else if (id == R.id.nav_grade) {
+            Intent intent = new Intent(this, AdminGradesActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_logout) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

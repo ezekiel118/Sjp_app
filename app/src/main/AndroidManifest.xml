@@ -18,6 +18,8 @@
         <activity android:name=".UserListAdminActivity"/>
         <activity android:name=".AdminClearanceActivity"/>
         <activity android:name=".AdminGradesActivity"/>
+        <activity android:name=".AdminAppointmentActivity"/>
+        <activity android:name=".AdminSelectUserActivity"/>
 
 
         <!-- User Screen -->
@@ -25,6 +27,7 @@
         <activity android:name=".UserProfileActivity"/>
         <activity android:name=".UserClearanceActivity"/>
         <activity android:name=".UserGradesActivity"/>
+        <activity android:name=".UserAppointmentActivity"/>
 
 
         <!-- Login Screen (Main) -->

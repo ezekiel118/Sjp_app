@@ -1,4 +1,3 @@
-// app/src/main/java/com/example/sjp_app/adapters/UserAdapter.java
 package adapters;
 
 import android.content.Context;
@@ -45,9 +44,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position) {
         User u = filtered.get(position);
+
         holder.tvName.setText(u.getFullName() != null ? u.getFullName() : "(no name)");
         holder.tvContact.setText(u.getContact() != null ? u.getContact() : "");
         holder.tvRole.setText(u.getRole() != null ? u.getRole() : "user");
+
+        // Show red dot if user has new appointment
+        if (u.isHasNewAppointment()) {
+            holder.redDot.setVisibility(View.VISIBLE);
+        } else {
+            holder.redDot.setVisibility(View.GONE);
+        }
+
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onUserClick(u);
@@ -56,7 +64,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
     }
 
     @Override
-    public int getItemCount() { return filtered.size(); }
+    public int getItemCount() {
+        return filtered.size();
+    }
 
     public void update(List<User> newData) {
         orig.clear();
@@ -83,11 +93,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.VH> {
 
     static class VH extends RecyclerView.ViewHolder {
         TextView tvName, tvContact, tvRole;
+        View redDot; // <-- new red dot for appointments
+
         VH(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvUserName);
             tvContact = itemView.findViewById(R.id.tvUserContact);
             tvRole = itemView.findViewById(R.id.tvUserRole);
+            redDot = itemView.findViewById(R.id.redDot); // make sure to add red_dot in item_user.xml
         }
     }
 }

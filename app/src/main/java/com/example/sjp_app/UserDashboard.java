@@ -79,7 +79,8 @@ public class UserDashboard extends AppCompatActivity {
                 Intent intent = new Intent(UserDashboard.this, MainActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_appointment) {
-                Toast.makeText(this, "Appointment clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserDashboard.this, UserAppointmentActivity.class);
+                startActivity(intent);
 
             } else if (id == R.id.nav_clearance) {
                 Intent intent = new Intent(UserDashboard.this, UserClearanceActivity.class);
@@ -88,8 +89,7 @@ public class UserDashboard extends AppCompatActivity {
                 Intent intent = new Intent(UserDashboard.this, UserGradesActivity.class);
                 startActivity(intent);
             } else if (id == R.id.nav_home) {
-                Intent intent = new Intent(UserDashboard.this, UserDashboard.class);
-                startActivity(intent);
+
             }
             drawerLayout.closeDrawer(GravityCompat.START);
             return true;

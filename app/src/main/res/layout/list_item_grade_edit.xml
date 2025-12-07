@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:textColor="@color/black"
         android:text="Subject"
         android:textSize="16sp" />
 
@@ -18,6 +19,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:hint="Grade"
+        android:textColor="@color/black"
         android:inputType="numberDecimal"
         android:gravity="end"/>
 </LinearLayout>
